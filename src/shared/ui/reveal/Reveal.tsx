@@ -1,39 +1,42 @@
 import { useEffect, useRef, type ReactNode } from "react";
-import { cn } from "@/utils/cn";
+import { cn } from "@/shared/lib/cn";
 
-export default function Reveal({
-  children,
-  className,
-  delay = 0,
-}: {
+export interface RevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-}) {
+}
+
+export function Reveal({ children, className, delay = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const io = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add("is-in");
-          io.disconnect();
+          observer.disconnect();
         }
       },
-
-      { threshold: 0.09 },
+      { threshold: 0.08 }
     );
 
-    io.observe(el);
-    return () => io.disconnect();
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div ref={ref} className={cn("reveal", className)} style={{ transitionDelay: `${delay}ms` }}>
+    <div
+      ref={ref}
+      className={cn("reveal", className)}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
       {children}
     </div>
   );
 }
+
+export default Reveal;

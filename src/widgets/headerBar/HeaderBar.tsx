@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback, useMemo, memo } from "react";
-import { cn } from "@/utils/cn";
-import { Button } from "@/shared/ui/baseButton/BaseButton";
+import { cn } from "@/shared/lib/cn";
+import { Button } from "@/shared/ui/baseButton";
 
-// Компонент времени – обновляется каждую секунду, но не триггерит перерисовку всего хедера
+// TimeDisplay updates every second without rerendering the entire header
 const TimeDisplay = memo(() => {
   const [now, setNow] = useState(() => new Date());
 
@@ -21,30 +21,39 @@ const TimeDisplay = memo(() => {
 });
 TimeDisplay.displayName = "TimeDisplay";
 
-
-// Общие стили для кнопок "—" и "□"
 const MINIMIZE_FULLSCREEN_STYLES = {
   "--btn-bg-hover": "#11111130",
   "--btn-bg-active": "#11111130",
 } as React.CSSProperties;
 
-export default function HeaderBar() {
+const CLOSE_BTN_STYLES = {
+  "--btn-text-hover": "#ffffff",
+  "--btn-text-active": "#ffffff",
+  "--btn-border-hover": "#ffffff",
+  "--btn-border-active": "#ffffff",
+  "--btn-bg-hover": "#e01d1d",
+  "--btn-bg-active": "#e01d1d",
+} as React.CSSProperties;
+
+export function HeaderBar() {
   const [wobble, setWobble] = useState(0);
 
-  // Обработчики с мемоизацией
   const handleScrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const handleFullscreen = useCallback(() => {
-    window.document.documentElement.requestFullscreen?.();
+    if (!document.fullscreenElement) {
+      window.document.documentElement.requestFullscreen?.().catch(() => {});
+    } else {
+      window.document.exitFullscreen?.().catch(() => {});
+    }
   }, []);
 
   const handleWobble = useCallback(() => {
     setWobble((w) => w + 1);
   }, []);
 
-  // Конфигурация кнопок – мемоизируется, чтобы не создавать массив при каждом рендере
   const buttons = useMemo(
     () => [
       {
@@ -53,7 +62,7 @@ export default function HeaderBar() {
         style: MINIMIZE_FULLSCREEN_STYLES,
         onClick: handleScrollToTop,
         className: "px-4",
-        title: "Нажмите чтобы вернуться на вверх"
+        title: "Нажмите чтобы вернуться наверх",
       },
       {
         key: "fullscreen",
@@ -61,39 +70,31 @@ export default function HeaderBar() {
         style: MINIMIZE_FULLSCREEN_STYLES,
         onClick: handleFullscreen,
         className: "flex justify-center items-center px-4",
-        title: "Нажмите чтобы сделать полноэкран"
+        title: "Нажмите чтобы сделать полноэкранным",
       },
       {
         key: "close",
         children: "X",
-        style: {
-          "--btn-text-hover": "#ffffff",
-          "--btn-text-active": "#ffffff",
-          "--btn-border-hover": "#ffffff",
-          "--btn-border-active": "#ffffff",
-          "--btn-bg-hover": "#e01d1d",
-          "--btn-bg-active": "#e01d1d",
-        } as React.CSSProperties,
+        style: CLOSE_BTN_STYLES,
         onClick: handleWobble,
         className: "px-4",
-        title: "Нажмите чтобы закрыть :)"
+        title: "Нажмите чтобы закрыть :)",
       },
     ],
     [handleScrollToTop, handleFullscreen, handleWobble]
   );
 
   return (
-    <header className="sticky top-0 z-40 bg-paper/95 backdrop-blur-[5px] border-b-2 border-ink ">
+    <header className="sticky top-0 z-40 bg-paper/95 backdrop-blur-[5px] border-b-2 border-ink">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        {/* key={wobble} заставляет элемент пересоздаваться, перезапуская анимацию */}
         <div
           key={wobble}
           className={cn(
-            "flex flex-wrap items-center justify-center  sm:justify-between gap-3 py-2",
+            "flex flex-wrap items-center justify-center sm:justify-between gap-3 py-2",
             wobble > 0 && "anim-wobble"
           )}
         >
-          <p className="truncate text-xs hidden sm:inline-block sm:text-sm font-mono-code ">
+          <p className="truncate text-xs hidden sm:inline-block sm:text-sm font-mono-code">
             file://localhost/oops-mic-broken/index.html
           </p>
           <div className="flex flex-wrap justify-between w-full sm:w-auto items-center gap-2 shrink-0">
@@ -119,3 +120,5 @@ export default function HeaderBar() {
     </header>
   );
 }
+
+export default HeaderBar;

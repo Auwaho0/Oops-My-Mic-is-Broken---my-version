@@ -1,0 +1,6 @@
+{
+  "name": "Oops, My Mic is Broken",
+  "description": "Генератор отговорок и дека фоновых шумов для тех, кто прямо сейчас на созвоне.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,12 +1,12 @@
 // shared/ui/Button/Button.tsx
-import { cn } from '@/utils/cn';
+import { cn } from "@/shared/lib/cn";
 import {
   forwardRef,
   ButtonHTMLAttributes,
   useState, useCallback,
   useMemo
 } from 'react';
-import '@/shared/ui/basebutton/BaseButton.css';
+import './BaseButton.css';
 
 type TButtonSize = 'sm' | 'md' | 'lg';
 
