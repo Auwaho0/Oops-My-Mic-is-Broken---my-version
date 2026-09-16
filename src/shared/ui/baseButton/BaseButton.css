@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+
+/* ---------------------------------------------------------------------------
+                             btn-header
+--------------------------------------------------------------------------- */
+.btn-base {
+   border: 2px solid var(--btn-border, #111);
+   background-color: var(--btn-bg, var(--color-paper));
+   color: var(--btn-text, #111);
+   font-weight: 700;
+   box-shadow: 3px 3px 0 #111;
+   transition: transform 0.05s ease, box-shadow 0.05s ease,
+      background-color 0.15s ease, border-color 0.15s ease,
+      color 0.15s ease;
+   touch-action: manipulation;
+   /* убивает 300ms задержку */
+}
+
+@media (hover: hover) and (pointer: fine) {
+   .btn-base:hover {
+      border-color: var(--btn-border-hover, #111);
+      background-color: var(--btn-bg-hover, var(--color-paper));
+      color: var(--btn-text-hover, #111);
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 #111;
+   }
+}
+
+.btn-base:active,
+.btn-base--active {
+   border-color: var(--btn-border-active, #111);
+   background-color: var(--btn-bg-active, var(--color-paper));
+   color: var(--btn-text-active, #111);
+   transform: translate(2px, 2px);
+   box-shadow: 1px 1px 0 #111;
+}
+
+/* Дополнительно: сброс состояния после касания на iOS */
+.btn-base:focus-visible {
+   outline: 2px dashed var(--color-ink);
+   outline-offset: 3px;
+}
+
+.btn-base:focus:not(:focus-visible) {
+   outline: none;
+   /* убираем фокус после тача */
+}
