@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { webAudioEngine, type SoundId } from "@/shared/lib/audio";
 
+
 interface SoundState {
   activeSounds: SoundId[];
   volume: number;
@@ -10,13 +11,15 @@ interface SoundState {
   isSoundActive: (id: SoundId) => boolean;
 }
 
+
 export const useSoundStore = create<SoundState>((set, get) => ({
   activeSounds: [],
   volume: 35,
-
+  // переключатель трека вкл и выкл
   toggleSound: (id: SoundId) => {
     const isNowPlaying = webAudioEngine.toggle(id);
     set((state) => {
+      // если играет то оставляем если нет то убираем
       if (isNowPlaying) {
         if (!state.activeSounds.includes(id)) {
           return { activeSounds: [...state.activeSounds, id] };
@@ -42,4 +45,5 @@ export const useSoundStore = create<SoundState>((set, get) => ({
   isSoundActive: (id: SoundId) => {
     return get().activeSounds.includes(id);
   },
+
 }));

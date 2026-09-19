@@ -1,1 +1,1 @@
-export { HeaderBar, default } from "./HeaderBar";
+export { HeaderBar } from "./ui/HeaderBar";

@@ -1,4 +1,4 @@
-export { useSoundStore } from "./model/soundStore";
+export { useSoundStore } from "./model/usesoundStore";
 export { SoundButton } from "./ui/SoundButton";
 export { VolumeControl } from "./ui/VolumeControl";
 export { GroupSection } from "./ui/GroupSection";

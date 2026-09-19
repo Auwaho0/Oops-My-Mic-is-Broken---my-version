@@ -2,34 +2,38 @@ import { memo } from "react";
 import type { ComponentType } from "react";
 import { cn } from "@/shared/lib/cn";
 import type { SoundId } from "@/shared/lib/audio";
+import { useSoundStore } from "@/features/soundboard";
 
 export interface SoundButtonProps {
   id: SoundId;
   label: string;
   sub: string;
   Icon: ComponentType<{ className?: string; strokeWidth?: number }>;
-  on: boolean;
-  onToggle: (id: SoundId) => void;
 }
 
 export const SoundButton = memo(
-  ({ id, label, sub, Icon, on, onToggle }: SoundButtonProps) => {
+  ({ id, label, sub, Icon }: SoundButtonProps) => {
+
+    const isActive = useSoundStore((s) => s.activeSounds.includes(id));
+
+    const toggleSound = useSoundStore((s) => s.toggleSound);
+
     return (
       <button
         type="button"
         id={`sound-btn-${id}`}
-        onClick={() => onToggle(id)}
-        aria-pressed={on}
+        onClick={() => toggleSound(id)}
+        aria-pressed={isActive}
         className={cn(
           "group flex items-center gap-4 border-[3px] border-ink p-4 text-left transition-all cursor-pointer select-none",
           "shadow-[5px_5px_0_var(--color-ink)] hover:-translate-y-1 active:translate-x-1 active:translate-y-1 active:shadow-none",
-          on ? "bg-ink text-paper" : "bg-paper hover:bg-paper-dark"
+          isActive ? "bg-ink text-paper" : "bg-paper hover:bg-paper-dark"
         )}
       >
         <span
           className={cn(
             "grid size-12 shrink-0 place-items-center border-2 transition-colors",
-            on
+            isActive
               ? "border-paper/60 bg-blood text-paper"
               : "border-ink bg-paper group-hover:bg-ink group-hover:text-paper"
           )}
@@ -40,11 +44,11 @@ export const SoundButton = memo(
           <span className="block font-display text-lg font-semibold uppercase leading-tight">
             {label}
           </span>
-          <span className={cn("block truncate text-xs", on ? "text-paper/70" : "text-ink/60")}>
+          <span className={cn("block truncate text-xs", isActive ? "text-paper/70" : "text-ink/60")}>
             {sub}
           </span>
         </span>
-        {on ? (
+        {isActive ? (
           <span className="eq flex h-4 items-end gap-[3px] text-blood" aria-label="играет">
             <span />
             <span />

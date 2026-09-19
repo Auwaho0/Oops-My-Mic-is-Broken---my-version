@@ -1,21 +1,17 @@
-import { memo, useMemo } from "react";
+import { memo, useMemo, useCallback, useState } from "react";
 import { Button } from "@/shared/ui/baseButton";
+import "./StatusDisplay.css"
+import type IStatusItem from "./type/type"
 
-export interface StatusItem {
-  text: string;
-  dot: string;
-  ring: string;
-  blink: boolean;
-}
 
-export const STATUSES: StatusItem[] = [
-  { text: "ПРЯМО СЕЙЧАС НА СОЗВОНЕ", dot: "--color-blood", ring: "shadow-[0_0_0_3px_rgba(200,30,20,0.25)]", blink: true },
+const STATUSES: IStatusItem[] = [
+  { text: "ПРЯМО СЕЙЧАС НА СОЗВОНЕ", dot: "--color-blood", ring: "", blink: true },
   { text: "МИКРОФОН СЛОМАН. ЧЕСТНО.", dot: "--color-ink", ring: "", blink: false },
   { text: "ВЫШЕЛ ЗА КОФЕ НА 2 ЧАСА", dot: "--color-warn", ring: "", blink: true },
   { text: "БУДУ ТОЛЬКО В ЧАТЕ", dot: "--color-ok", ring: "", blink: true },
 ];
 
-export const STATUS_COUNT = STATUSES.length;
+const STATUS_COUNT = STATUSES.length;
 
 const BUTTON_STYLES = {
   "--btn-bg": "#e9e4d6",
@@ -26,12 +22,14 @@ const BUTTON_STYLES = {
 const BUTTON_BASE_CLASSES =
   "cursor-pointer group inline-flex flex-wrap justify-normal items-center gap-x-4 gap-y-2 border-[3px] border-ink px-5 sm:px-7 py-3.5 sm:py-4";
 
-export interface StatusDisplayProps {
-  status: number;
-  onClick: () => void;
-}
 
-export const StatusDisplay = memo(({ status, onClick }: StatusDisplayProps) => {
+export const StatusDisplay = memo(() => {
+  const [status, setStatus] = useState(0);
+
+  const handleStatus = useCallback(() => {
+    setStatus((v) => (v + 1) % STATUS_COUNT);
+  }, []);
+
   const currentStatus = useMemo(() => STATUSES[status] || STATUSES[0], [status]);
 
   const dotStyles = useMemo(() => {
@@ -46,7 +44,7 @@ export const StatusDisplay = memo(({ status, onClick }: StatusDisplayProps) => {
         type="button"
         id="status-toggle-btn"
         style={BUTTON_STYLES}
-        onClick={onClick}
+        onClick={handleStatus}
         className={BUTTON_BASE_CLASSES + " text-[2px]"}
         title="нажми, чтобы сменить статус"
       >

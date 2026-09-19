@@ -1,17 +1,3 @@
-
-/* перечёркивание текста */
-
-@keyframes strike-in {
-  from {
-    transform: scaleX(0);
-  }
-
-  to {
-    transform: scaleX(1);
-  }
-}
-
-
 /* мигание */
 
 @keyframes blink-dot {

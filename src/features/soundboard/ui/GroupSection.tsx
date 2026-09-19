@@ -4,12 +4,13 @@ import type { SoundId } from "@/shared/lib/audio";
 import { SoundButton } from "./SoundButton";
 
 export interface GroupSectionProps {
-  group: SoundCategoryGroup;
-  activeSounds: SoundId[];
-  onToggle: (id: SoundId) => void;
+  group: SoundCategoryGroup
 }
 
-export const GroupSection = memo(({ group, activeSounds, onToggle }: GroupSectionProps) => {
+export const GroupSection = memo(({ group }: GroupSectionProps) => {
+
+
+
   return (
     <div>
       <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b-2 border-ink pb-2">
@@ -27,8 +28,6 @@ export const GroupSection = memo(({ group, activeSounds, onToggle }: GroupSectio
             label={item.label}
             sub={item.sub}
             Icon={item.Icon}
-            on={activeSounds.includes(item.id)}
-            onToggle={onToggle}
           />
         ))}
       </div>

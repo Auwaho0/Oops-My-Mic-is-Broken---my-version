@@ -1,21 +1,27 @@
-const NAV = [
+interface IMenuButton {
+  label: string,
+  href: string
+}
+
+const NAV: readonly IMenuButton[] = [
   { label: "[МЕНЮ]", href: "#top" },
   { label: "[О ПРОЕКТЕ]", href: "#about" },
-  { label: "[КОНТАКТЫ]", href: "#contacts" },
   { label: "[ЗАПИСИ]", href: "#sounds" },
   { label: "[АЛИБИ]", href: "#excuses" },
+  { label: "[КОНТАКТЫ]", href: "#contacts" },
 ];
+
 
 export function Menu() {
   return (
     <nav className="flex flex-wrap font-mono-code items-center gap-x-5 gap-y-1 py-2.5 mx-auto max-w-7xl px-4 sm:px-6 pb-1">
-      {NAV.map((n) => (
+      {NAV.map(({ label, href }) => (
         <a
-          key={n.label}
-          href={n.href}
+          key={label}
+          href={href}
           className="select-none py-1 px-2 border-b-2 border-transparent transition-all cursor-pointer whitespace-nowrap hover:text-red-600 hover:border-black"
         >
-          {n.label}
+          {label}
         </a>
       ))}
       <span className="ml-auto hidden md:inline text-xs text-ink/60">

@@ -1,13 +1,9 @@
-import { useCallback, useMemo, useState } from "react";
-import { StatusDisplay, STATUS_COUNT } from "@/features/hero-status";
-import "@/widgets/hero/Hero.css";
+import { useMemo } from "react";
+import { StatusDisplay } from "@/features/hero-status";
+import "./Hero.css";
 
 export function Hero() {
-  const [status, setStatus] = useState(0);
 
-  const handleStatus = useCallback(() => {
-    setStatus((v) => (v + 1) % STATUS_COUNT);
-  }, []);
 
   const todayDate = useMemo(() => new Date().toISOString().slice(0, 10), []);
 
@@ -36,7 +32,7 @@ export function Hero() {
         </span>
       </h1>
 
-      <StatusDisplay status={status} onClick={handleStatus} />
+      <StatusDisplay />
 
       <p className="mt-8 text-xs sm:text-sm text-ink/80 font-mono">
         v0.3 — {todayDate} — unsaved draft — собрано за 4 минуты до дедлайна

@@ -1,27 +1,13 @@
-import { useMemo } from "react";
 import { SOUND_GROUPS } from "@/entities/sound";
 import { Reveal } from "@/shared/ui/reveal";
 import {
   GroupSection,
-  VolumeControl,
-  useSoundStore,
+  VolumeControl
 } from "@/features/soundboard";
 
-function getAwkwardCaption(v: number): string {
-  if (v <= 15) return "почти не слышно — «кажется, у тебя что-то шумит?»";
-  if (v <= 40) return "уверенный фон — «да, это соседи, я не при чём»";
-  if (v <= 70) return "громко — «извините, что вы говорите???»";
-  return "максимум — соседи стучат в стену. пора эвакуироваться";
-}
+
 
 export function Soundboard() {
-  const activeSounds = useSoundStore((state) => state.activeSounds);
-  const volume = useSoundStore((state) => state.volume);
-  const toggleSound = useSoundStore((state) => state.toggleSound);
-  const stopAll = useSoundStore((state) => state.stopAll);
-  const setVolume = useSoundStore((state) => state.setVolume);
-
-  const caption = useMemo(() => getAwkwardCaption(volume), [volume]);
 
   return (
     <section id="sounds" className="bg-amber-100/60 border-t-2 border-ink">
@@ -43,13 +29,7 @@ export function Soundboard() {
         </Reveal>
 
         <Reveal delay={80}>
-          <VolumeControl
-            volume={volume}
-            caption={caption}
-            hasActiveSounds={activeSounds.length > 0}
-            onChange={setVolume}
-            onStopAll={stopAll}
-          />
+          <VolumeControl />
         </Reveal>
 
         <div className="mt-12 space-y-12">
@@ -57,8 +37,7 @@ export function Soundboard() {
             <Reveal key={g.title} delay={gi * 60}>
               <GroupSection
                 group={g}
-                activeSounds={activeSounds}
-                onToggle={toggleSound}
+
               />
             </Reveal>
           ))}
