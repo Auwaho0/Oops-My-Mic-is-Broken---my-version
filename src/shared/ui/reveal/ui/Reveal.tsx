@@ -1,5 +1,6 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/shared/lib/cn";
+import "./Reveal.css"
 
 export interface RevealProps {
   children: ReactNode;

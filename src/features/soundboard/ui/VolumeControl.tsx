@@ -5,9 +5,6 @@ import { cn } from "@/shared";
 import { ACTIVE_STYLE, DISABLED_STYLE, baseStyle } from "../model/VolumeControlButtons";
 
 
-
-
-
 function getAwkwardCaption(v: number): string {
   if (v <= 15) return "почти не слышно — «кажется, у тебя что-то шумит?»";
   if (v <= 40) return "уверенный фон — «да, это соседи, я не при чём»";

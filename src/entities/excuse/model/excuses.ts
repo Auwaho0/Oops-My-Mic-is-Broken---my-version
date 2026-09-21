@@ -5,6 +5,7 @@ export const CATEGORIES: CategoryConfig[] = [
   { id: "polite", label: "ВЕЖЛИВЫЕ", hint: "с уважением к календарю коллег" },
   { id: "tech", label: "ТЕХНИЧЕСКИЕ", hint: "виноват драйвер, не я" },
   { id: "absurd", label: "АБСУРДНЫЕ", hint: "звучит как правда. почти" },
+  { id: "other", label: "СВОИ", hint: "На особые случаи" },
 ];
 
 export const EXCUSES: Record<ExcuseCategory, string[]> = {
@@ -48,6 +49,7 @@ export const EXCUSES: Record<ExcuseCategory, string[]> = {
     "Микрофон ушёл на СВО — специальную военную операцию по замене батареек.",
     "По гороскопу сегодня Меркурий в ретрограде, любая речь карается лагами.",
   ],
+  other: []
 };
 
 export const TICKER_ITEMS = [

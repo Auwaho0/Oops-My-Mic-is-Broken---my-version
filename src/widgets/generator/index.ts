@@ -1,1 +1,1 @@
-export { GeneratorWidget, default } from "./GeneratorWidget";
+export { GeneratorWidget } from "./ui/GeneratorWidget";

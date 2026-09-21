@@ -1,5 +1,6 @@
 import { memo, useMemo } from "react";
 import { TICKER_ITEMS } from "@/entities/excuse";
+import "./Ticker.css"
 
 export const Ticker = memo(() => {
   const line = useMemo(() => TICKER_ITEMS.map((t) => `/// ${t}`).join("  "), []);

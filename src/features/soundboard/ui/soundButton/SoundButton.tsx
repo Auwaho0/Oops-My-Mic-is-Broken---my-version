@@ -1,18 +1,11 @@
 import { memo } from "react";
-import type { ComponentType } from "react";
 import { cn } from "@/shared/lib/cn";
-import type { SoundId } from "@/shared/lib/audio";
 import { useSoundStore } from "@/features/soundboard";
-
-export interface SoundButtonProps {
-  id: SoundId;
-  label: string;
-  sub: string;
-  Icon: ComponentType<{ className?: string; strokeWidth?: number }>;
-}
+import type { ISoundButtonProps } from "../../model/type/type"
+import "./SoundButton.css"
 
 export const SoundButton = memo(
-  ({ id, label, sub, Icon }: SoundButtonProps) => {
+  ({ id, label, sub, Icon }: ISoundButtonProps) => {
 
     const isActive = useSoundStore((s) => s.activeSounds.includes(id));
 

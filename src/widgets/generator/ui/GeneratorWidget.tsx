@@ -1,6 +1,8 @@
 import { memo } from "react";
 import { Reveal } from "@/shared/ui/reveal";
 import { ExcuseGenerator } from "@/features/excuse-generator";
+import "./GeneratorWidget.css"
+
 
 export const GeneratorWidget = memo(() => {
   return (

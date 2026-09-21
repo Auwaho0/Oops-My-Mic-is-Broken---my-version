@@ -1,2 +1,2 @@
-export { Reveal, default } from "./Reveal";
-export type { RevealProps } from "./Reveal";
+export { Reveal, default } from "./ui/Reveal";
+export type { RevealProps } from "./ui/Reveal";

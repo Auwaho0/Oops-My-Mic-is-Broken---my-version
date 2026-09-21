@@ -1,1 +1,1 @@
-export { Ticker, default } from "./Ticker";
+export { Ticker, default } from "./ui/Ticker";

@@ -1,1 +1,1 @@
-export { Soundboard, default } from "./Soundboard";
+export { Soundboard, default } from "./ui/Soundboard";

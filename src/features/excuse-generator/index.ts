@@ -1,2 +1,2 @@
 export { ExcuseGenerator } from "./ui/ExcuseGenerator";
-export { useExcuseGenerator } from "./model/useExcuseGenerator";
+export { useExcuseStore } from "./model/useExcuseGenerator";

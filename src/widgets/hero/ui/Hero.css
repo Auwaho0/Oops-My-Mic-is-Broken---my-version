@@ -9,3 +9,8 @@
     transform: scaleX(1);
   }
 }
+
+.anim-strike {
+  transform-origin: left center;
+  animation: strike-in 0.5s 0.7s cubic-bezier(0.7, 0, 0.3, 1) both;
+}

@@ -1,18 +1,11 @@
 import { create } from "zustand";
 import { webAudioEngine, type SoundId } from "@/shared/lib/audio";
+import type { ISoundState } from "../model/type/type";
 
 
-interface SoundState {
-  activeSounds: SoundId[];
-  volume: number;
-  toggleSound: (id: SoundId) => void;
-  stopAll: () => void;
-  setVolume: (v: number) => void;
-  isSoundActive: (id: SoundId) => boolean;
-}
 
 
-export const useSoundStore = create<SoundState>((set, get) => ({
+export const useSoundStore = create<ISoundState>((set, get) => ({
   activeSounds: [],
   volume: 35,
   // переключатель трека вкл и выкл

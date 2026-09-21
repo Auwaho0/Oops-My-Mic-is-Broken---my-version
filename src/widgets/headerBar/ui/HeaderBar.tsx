@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
 import { cn } from "@/shared/lib/cn";
-import { TimeDisplay } from "@/features/headerBar-TimeDisplay";
-import type { THeaderButtonKey } from "@/features/headerBar-ButtonActions/model/headerButtons";
-import { HeaderBarActions } from "@/features/headerBar-ButtonActions/ui/HeaderBarActions";
+import { TimeDisplay } from "@/features/headerBar";
+import type { THeaderButtonKey } from "@/features/headerBar";
+import { HeaderBarActions } from "@/features/headerBar";
+import "./HeaderBar.module.css"
 
 
 export function HeaderBar() {

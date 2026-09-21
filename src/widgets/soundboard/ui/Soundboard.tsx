@@ -37,7 +37,6 @@ export function Soundboard() {
             <Reveal key={g.title} delay={gi * 60}>
               <GroupSection
                 group={g}
-
               />
             </Reveal>
           ))}

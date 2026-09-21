@@ -69,4 +69,9 @@ export const SOUND_GROUPS: SoundCategoryGroup[] = [
       },
     ],
   },
+  {
+    title: "[ Свои ]",
+    note: "пользовательские записи для особых случаев",
+    items: [],
+  },
 ];

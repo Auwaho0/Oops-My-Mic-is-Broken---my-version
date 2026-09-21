@@ -1,4 +1,4 @@
-export type ExcuseCategory = "brazen" | "polite" | "tech" | "absurd";
+export type ExcuseCategory = "brazen" | "polite" | "tech" | "absurd" | "other";
 
 export interface CategoryConfig {
   id: ExcuseCategory;
